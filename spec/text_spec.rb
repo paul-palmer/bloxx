@@ -66,4 +66,13 @@ describe RawText do
     expect(line.to_s).to eq %q<{text:"this is bold. ",bold:true,extra:[{text:"this is blue italic.",bold:false,italic:true,color:blue},{text:"this is yellow italic.",bold:false,italic:true,color:yellow}]}>
   end
 
+  it 'run a command when a string is clicked' do
+    line = RunOnClick.new('/say hello')
+    line << 'click this string.'
+
+    expect(line.to_s).to eq %q<{text:"click this string."}>
+  end
+
+
+
 end

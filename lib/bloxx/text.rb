@@ -125,29 +125,34 @@ module Bloxx
     def reset;                @flags = INIT_FLAGS.clone end
 
     def to_s;                 self.to_nbt end
-    def to_nbt;               self.format(FormatState.new) end
+    def to_nbt;               self.format(FormatState.new, FormatState.new) end
 
-    def format(state)
-      split_after = false
-      actions = @actions.slice_before {|a| split_after.tap {split_after = a.text?}}.to_a
-
-      #warn actions.first.inspect
+    def format(initial_state, cum_state)
+      actions = split_after_text(@actions)
 
       # the first segment is special and modifies state for the entire run
-      result = format_actions(actions.shift, state)
+      result = format_actions(actions.shift, initial_state, cum_state)
       return "{#{result}}" if actions.empty?
 
       # remaining text segments inherit formatting from the first one
-      extra = actions.map {|a| format_actions(a, state.clone)}
-      extra = "#{extra.map {|e| "{#{e}}"}.join(',')}"
+      extra = actions.map {|a| "{#{format_actions(a, initial_state.clone, cum_state)}}"}.join(',')
       "{#{result},extra:[#{extra}]}"
     end
 
-    def format_actions(actions, state)
+    def split_after_text(actions)
+      split_after = false
+      actions.slice_before {|a| split_after.tap {split_after = a.text?}}.to_a
+    end
+
+    def apply_formats(actions, state)
+      actions.each {|a| a.format(state)}
+    end
+
+    def format_actions(actions, state, cum_state)
       initial_state = state.clone
       text = actions.last.text? ? actions.pop : %q<"">
-      actions.each {|a| a.format(state)} # apply formatting
-      hsh = {text: text}.merge((state - initial_state).flags)
+      actions.each {|a| a.format(cum_state); a.format(state)} # apply formatting
+      hsh = {text: text}.merge((cum_state - initial_state).flags)
       "#{hsh.map{|k,v| "#{k}:#{v}"}.join(',')}"
     end
 
