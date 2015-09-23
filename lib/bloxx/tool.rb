@@ -12,12 +12,12 @@ module Bloxx
   end
 
   class SummonCommand
-    def initialize(entity, x = nil, y = nil, z = nil)
-      @entity, @where = entity, [x, y, z].join(' ')
+    def initialize(entity, x = '~', y = '~', z = '~')
+      @entity, @where = entity, [nil, x, y, z].join(' ')
     end
 
     def to_s
-      %<summon #{@entity.type} #{@where} #{@entity}>
+      %<summon #{@entity.type}#{@where unless @where == ' ~ ~ ~'} #{@entity}>
     end
   end
 

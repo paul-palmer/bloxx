@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-include Bloxx
-
 describe RunOnClick do
   it 'can be created' do
     line = RunOnClick.new('/say hello')

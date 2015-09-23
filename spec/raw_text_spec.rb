@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-include Bloxx
-
 describe RawText do
   it 'can be created' do
     line = RawText.new

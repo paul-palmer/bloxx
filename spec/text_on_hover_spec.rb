@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-include Bloxx
-
 describe TextOnHover do
   it 'can be created' do
     hover = 'hover text'

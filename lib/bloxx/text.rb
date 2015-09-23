@@ -5,43 +5,6 @@ require_relative 'base'
 
 module Bloxx
 
-  class FormatState
-    attr_reader :flags
-
-    def initialize(flags = nil)
-      @flags = flags || INIT_FLAGS.clone
-    end
-
-    def end_bold;           @flags[:bold] = false end
-    def end_italic;         @flags[:italic] = false end
-    def end_obfuscated;     @flags[:obfuscated] = false end
-    def end_strikethrough;  @flags[:strikethrough] = false end
-    def end_underline;      @flags[:underline] = false end
-
-    def start_bold;           @flags[:bold] = true end
-    def start_italic;         @flags[:italic] = true end
-    def start_obfuscated;     @flags[:obfuscated] = true end
-    def start_strikethrough;  @flags[:strikethrough] = true end
-    def start_underline;      @flags[:underline] = true end
-
-    def color;    @flags[:color] end
-    def color=(v) @flags[:color] = v end
-    def reset;    @flags = INIT_FLAGS.clone end
-
-    INIT_FLAGS = {
-        bold:           false,
-        italic:         false,
-        obfuscated:     false,
-        strikethrough:  false,
-        underline:      false,
-        color:          'white',
-    }
-
-    def-(other)       FormatState.new(Hash[@flags.select {|k,v| other.flags[k] != v}]) end
-    def merge(other)  FormatState.new(@flags.merge(other.flags)) end
-    def clone;        FormatState.new(@flags.clone) end
-  end
-
 
   class RawText_Base
     def to_RawFormat; self end
@@ -76,7 +39,7 @@ module Bloxx
 
     def to_s;                 self.to_nbt end
     def to_nbt
-      state, cum_state = FormatState.new, FormatState.new
+      state, cum_state = State.new, State.new
 
       sequences = split_after_text(@actions)
 
@@ -134,6 +97,44 @@ module Bloxx
           obj.to_s
       end
     end
+
+    class State
+      attr_reader :flags
+
+      def initialize(flags = nil)
+        @flags = flags || INIT_FLAGS.clone
+      end
+
+      def end_bold;           @flags[:bold] = false end
+      def end_italic;         @flags[:italic] = false end
+      def end_obfuscated;     @flags[:obfuscated] = false end
+      def end_strikethrough;  @flags[:strikethrough] = false end
+      def end_underline;      @flags[:underline] = false end
+
+      def start_bold;           @flags[:bold] = true end
+      def start_italic;         @flags[:italic] = true end
+      def start_obfuscated;     @flags[:obfuscated] = true end
+      def start_strikethrough;  @flags[:strikethrough] = true end
+      def start_underline;      @flags[:underline] = true end
+
+      def color;    @flags[:color] end
+      def color=(v) @flags[:color] = v end
+      def reset;    @flags = INIT_FLAGS.clone end
+
+      INIT_FLAGS = {
+          bold:           false,
+          italic:         false,
+          obfuscated:     false,
+          strikethrough:  false,
+          underline:      false,
+          color:          'white',
+      }
+
+      def-(other)       State.new(Hash[@flags.select {|k,v| other.flags[k] != v}]) end
+      def merge(other)  State.new(@flags.merge(other.flags)) end
+      def clone;        State.new(@flags.clone) end
+    end
+
 
     class StartFormat < RawText_Base; end
     class EndFormat   < RawText_Base; end
