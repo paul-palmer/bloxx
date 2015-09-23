@@ -5,7 +5,7 @@ describe DiamondSword do
   it 'can be created' do
     sword = DiamondSword.new
 
-    expect(SummonCommand.new(sword).to_s).to eq %q<summon diamond_sword {}>
+    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {}>
   end
 
   it 'with complex attributes' do
@@ -17,7 +17,7 @@ describe DiamondSword do
       mci.enchantments << Sharpness.new(80)
     end
 
-    expect(SummonCommand.new(sword).to_s).to eq %q<summon diamond_sword {Unbreakable:1,HideFlags:5,display:{Name:Death!},ench:[{id:16,lvl:80}]}>
+    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {Unbreakable:1,HideFlags:5,display:{Name:Death!},ench:[{id:16,lvl:80}]}>
   end
 
   it 'with complex attributes, part 2' do
@@ -32,7 +32,7 @@ describe DiamondSword do
       mci.enchantments << Sharpness.new(8)
     end
 
-    expect(SummonCommand.new(sword).to_s).to eq %q<summon diamond_sword {Unbreakable:1,HideFlags:5,display:{Name:Sticker!,Lore:["Pointy end towards your enemy"]},ench:[{id:19,lvl:2},{id:21,lvl:50},{id:16,lvl:8}]}>
+    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {Unbreakable:1,HideFlags:5,display:{Name:Sticker!,Lore:["Pointy end towards your enemy"]},ench:[{id:19,lvl:2},{id:21,lvl:50},{id:16,lvl:8}]}>
   end
 
 end
