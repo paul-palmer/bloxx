@@ -1,7 +1,18 @@
 # Bloxx
 
-This gem currently provides tools for crafting syntactically correct Minecraft client
-commands.
+This gem provides tools for crafting syntactically correct Minecraft client
+  commands.
+
+## History
+
+This code started off as an ad-hoc collection of Ruby code to simplify the construction
+  of complex client commands needed while constructing Minecraft worlds for my children.
+  Eventually, the code because useful enough in its own right, that I thought others might
+  find it useful if it were packaged up as a gem. It is currently in the early stages of
+  its migration. Test cases are spotty and the documentation is almost non-existent.
+ 
+My hope is that this gem will continue to grow and evolve into a complete system for
+ running client-side bots.
 
 ## Installation
 
@@ -38,3 +49,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## To Do
+
+- [x] Create basic gem scaffolding
+- [ ] Create robust specs for testing.
+- [ ] Document how to use the current classes
+- [ ] Add the tool that translates RTF documents into Minecraft books
+- [ ] Add the tool that automates command sequences using falling-sand
+- [ ] Add support for the Minecraft protocol
+- [ ] Add support for version 1.9 when it is released
