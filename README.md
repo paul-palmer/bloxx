@@ -55,6 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 - [x] Create basic gem scaffolding
 - [ ] Create robust specs for testing.
 - [ ] Document how to use the current classes
+- [ ] Publish on rubygems.org
 - [ ] Add the tool that translates RTF documents into Minecraft books
 - [ ] Add the tool that automates command sequences using falling-sand
 - [ ] Add support for the Minecraft protocol

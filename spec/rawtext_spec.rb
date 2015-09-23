@@ -3,6 +3,12 @@ require 'spec_helper'
 include Bloxx
 
 describe RawText do
+  it 'can be created' do
+    line = RawText.new
+
+    expect(line.to_s).to eq %q<{}>
+  end
+
   it 'formats a simple string' do
     line = RawText.new
     line << 'this is a string.'
@@ -24,6 +30,30 @@ describe RawText do
     line << 'this is italic.'
 
     expect(line.to_s).to eq %q<{text:"this is italic.",italic:true}>
+  end
+
+  it 'formats an obfuscated string' do
+    line = RawText.new
+    line.obfuscated_start
+    line << 'this is obfuscated.'
+
+    expect(line.to_s).to eq %q<{text:"this is obfuscated.",obfuscated:true}>
+  end
+
+  it 'formats an strikethrough string' do
+    line = RawText.new
+    line.strikethrough_start
+    line << 'this is strikethrough.'
+
+    expect(line.to_s).to eq %q<{text:"this is strikethrough.",strikethrough:true}>
+  end
+
+  it 'formats an underlined string' do
+    line = RawText.new
+    line.underline_start
+    line << 'this is underlined.'
+
+    expect(line.to_s).to eq %q<{text:"this is underlined.",underline:true}>
   end
 
   it 'can change the foreground color of a string' do
@@ -66,13 +96,7 @@ describe RawText do
     expect(line.to_s).to eq %q<{text:"this is bold. ",bold:true,extra:[{text:"this is blue italic.",bold:false,italic:true,color:blue},{text:"this is yellow italic.",bold:false,italic:true,color:yellow}]}>
   end
 
-  it 'run a command when a string is clicked' do
-    line = RunOnClick.new('/say hello')
-    line << 'click this string.'
-
-    expect(line.to_s).to eq %q<{text:"click this string."}>
-  end
-
-
+=begin
+=end
 
 end

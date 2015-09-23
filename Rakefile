@@ -7,4 +7,9 @@ RSpec::Core::RakeTask.new(:spec) do |task|
   task.rspec_opts = %w<--color --format progress>
 end
 
+RSpec::Core::RakeTask.new(:console) do |task|
+  bundle console
+end
+
 task :default => :spec
+task :test => :spec

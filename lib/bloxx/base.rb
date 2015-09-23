@@ -43,9 +43,10 @@ module Bloxx
   class SafeString < MCBase
     def initialize(s) @s = s.to_s end
 
-    def to_s
-      @s.tr_s!(UNSAFE_CHARS, UNSAFE_CHARS).nil? ? @s : %<"#{@s.gsub('"', '\"')}">
-    end
+    def to_s;   (@s.tr_s!(UNSAFE_CHARS, UNSAFE_CHARS).nil?) ? @s : self.quoted end
+    def quoted; %<"#{@s.gsub('"', '\"')}"> end
+
+    private
 
     UNSAFE_CHARS = %<[]{},'" >
   end
