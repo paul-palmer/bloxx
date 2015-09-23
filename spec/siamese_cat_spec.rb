@@ -5,7 +5,7 @@ describe SiameseCat do
   it 'can be created' do
     cat = SiameseCat.new
 
-    expect(SummonCommand.new(cat).to_s).to eq %q<summon Wolf {}>
+    expect(SummonCommand.new(cat).to_s).to eq %q<summon Ozelot {CatType:3}>
   end
 
   it 'with complex attributes' do
@@ -24,7 +24,7 @@ describe SiameseCat do
     cat.effects << FireResist.new(1-1, duration, false)
     cat.effects << WaterBreath.new(1-1, duration, false)
 
-    expect(SummonCommand.new(cat).to_s).to eq %q<summon Wolf {CustomName:RazorTooth,CustomNameVisible:1,OwnerUUID:4af775e8-2d26-45b9-a824-89c91110fb79,CollarColor:4,PersistenceRequired:1,Silent:1,AbsorptionAmount:40,ActiveEffects:[{Id:10,Amplifier:6,Duration:999999,ShowParticles:0},{Id:11,Amplifier:4,Duration:999999,ShowParticles:0},{Id:8,Amplifier:2,Duration:999999,ShowParticles:0},{Id:12,Amplifier:0,Duration:999999,ShowParticles:0},{Id:13,Amplifier:0,Duration:999999,ShowParticles:0}],Attributes:[{Name:generic.attackDamage,Base:15},{Name:generic.followRange,Base:4},{Name:generic.knockbackResistance,Base:0},{Name:generic.maxHealth,Base:80}]}>
+    expect(SummonCommand.new(cat).to_s).to eq %q<summon Ozelot {CatType:3,CustomName:Whiskers,CustomNameVisible:1,OwnerUUID:4af775e8-2d26-45b9-a824-89c91110fb79,PersistenceRequired:1,Silent:1,AbsorptionAmount:40,ActiveEffects:[{Id:10,Amplifier:6,Duration:999999,ShowParticles:0},{Id:11,Amplifier:4,Duration:999999,ShowParticles:0},{Id:12,Amplifier:0,Duration:999999,ShowParticles:0},{Id:13,Amplifier:0,Duration:999999,ShowParticles:0}],Attributes:[{Name:generic.maxHealth,Base:80}]}>
   end
 
 end
