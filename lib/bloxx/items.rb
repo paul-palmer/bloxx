@@ -32,7 +32,7 @@ module Bloxx
   end
 
   class DiamondSword < EnchantableItem
-    def initialize; super(276) end
+    def initialize; super('diamond_sword') end
   end
 
 
@@ -53,7 +53,7 @@ module Bloxx
   end
 
   class GoldenSword < EnchantableItem
-    def initialize; super(283) end
+    def initialize; super('golden_sword') end
   end
 
   class GoldenSword < EnchantableItem
@@ -78,7 +78,7 @@ module Bloxx
   end
 
   class IronSword < EnchantableItem
-    def initialize; super(267) end
+    def initialize; super('iron_sword') end
   end
 
 
@@ -99,7 +99,7 @@ module Bloxx
   end
 
   class StoneSword < EnchantableItem
-    def initialize; super(272) end
+    def initialize; super('stone_sword') end
   end
 
   class WoodenAxe < EnchantableItem
@@ -119,7 +119,7 @@ module Bloxx
   end
 
   class WoodenSword < EnchantableItem
-    def initialize; super(268) end
+    def initialize; super('wooden_sword') end
   end
 
   class Bone < EnchantableItem
