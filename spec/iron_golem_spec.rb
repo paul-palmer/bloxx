@@ -8,7 +8,7 @@ describe IronGolem do
     expect(SummonCommand.new(golem).to_s).to eq %q<summon VillagerGolem {}>
   end
 
-  it 'with a simple string' do
+  it 'with complex attributes' do
     duration = 999999
     golem = IronGolem.new
     golem.name = %<Rusty>
