@@ -20,6 +20,10 @@ module Bloxx
     def no_AI;           self['NoAI'] = 1 end
     def can_pickup_loot;self['CanPickUpLoot'] = 1 end
 
+    # should the block drop its item form if it cannot be placed?
+    def drop_item;      self['DropItem'] = 1 end
+    def no_drop_item;   self['DropItem'] = 0 end
+
     def fire;           self['Fire'] end # how many ticks the MOB will continue to be on fire
     def fire=(v)        self['Fire'] = v end
 

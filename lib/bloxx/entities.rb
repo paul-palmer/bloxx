@@ -1,6 +1,7 @@
 require_relative 'entity'
 require_relative 'cats'
 require_relative 'horses'
+require_relative 'minecarts'
 require_relative 'monsters'
 require_relative 'rabbits'
 
@@ -25,6 +26,15 @@ module Bloxx
     def drop_item?;     self['DropItem'] == 1 end
   end
 
+  class Fireball < Entity
+    def initialize
+      super('Fireball')
+      self.power = 1 # 0-127
+    end
+
+    def power=(v) self['ExplosionPower'] = v.to_i end
+  end
+
   class FireworksRocket < Entity
     def initialize
       super('FireworksRocketEntity')
@@ -46,7 +56,16 @@ module Bloxx
       self.fuse = 80 # ticks ~= 4 seconds
     end
 
-    def fuse=(v) self['Fuse'] = v end
+    def fuse=(v) self['Fuse'] = v.to_i end
+  end
+
+  class Slime < Entity
+    def initialize
+      super('Slime')
+      self.power = 1 # 0-127
+    end
+
+    def size=(v) self['Size'] = v.to_i end
   end
 
   class Wolf < Entity

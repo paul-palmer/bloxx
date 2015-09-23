@@ -2,12 +2,12 @@
 module Bloxx
 
   class SetBlockCommand
-    def initialize(entity, x = nil, y = nil, z = nil)
-      @entity, @where = entity, [x, y, z].join(' ')
+    def initialize(entity, x = '~', y = '~', z = '~')
+      @entity, @where = entity, [x, y, z, nil].join(' ')
     end
 
     def to_s
-      %<setblock #{@where} #{@entity.type} 0 replace #{@entity}>
+      %<setblock #{@where unless @where == '~ ~ ~ '}#{@entity.type} 0 replace #{@entity}>
     end
   end
 

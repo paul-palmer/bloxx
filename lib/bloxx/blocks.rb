@@ -130,7 +130,6 @@ module Bloxx
 
     def initialize
       super('chest')
-      #self << (@disp = Display.new)
       self << (@items = SlottedItems.new)
     end
 
@@ -156,6 +155,8 @@ module Bloxx
     end
   end
 
+
+
   class CommandBlock < Block
     include NameableBlock
 
@@ -170,11 +171,15 @@ module Bloxx
   end
 
 
+
   class MobSpawner < Block
-    def initialize(entity)
+    def initialize(entity = nil) # Minecraft 1.8 defaults to spawning pigs
       super('mob_spawner')
-      self['EntityId'] = entity.type
-      self['SpawnData'] = entity
+
+      unless entity.nil?
+        self['EntityId'] = entity.type
+        self['SpawnData'] = entity
+      end
     end
 
     def spawn_count;              self['SpawnCount'] end

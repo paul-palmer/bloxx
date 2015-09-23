@@ -4,7 +4,7 @@ module Bloxx
 
 
   class ChainBoots < EnchantableItem
-    def initialize; super(305) end
+    def initialize; super('chainmail_boots') end
   end
 
   class ChainChestplate < EnchantableItem
@@ -24,7 +24,7 @@ module Bloxx
 
 
   class DiamondBoots < EnchantableItem
-    def initialize; super(313) end
+    def initialize; super('diamond_boots') end
   end
 
   class DiamondChestplate < EnchantableItem
@@ -47,7 +47,7 @@ module Bloxx
 
 
   class GoldenBoots < EnchantableItem
-    def initialize; super(317) end
+    def initialize; super('golden_boots') end
   end
 
   class GoldenChestplate < EnchantableItem
@@ -70,7 +70,7 @@ module Bloxx
 
 
   class IronBoots < EnchantableItem
-    def initialize; super(309) end
+    def initialize; super('iron_boots') end
   end
 
   class IronChestplate < EnchantableItem
@@ -94,7 +94,7 @@ module Bloxx
 
 
   class LeatherBoots < EnchantableItem
-    def initialize; super(301) end
+    def initialize; super('leather_boots') end
   end
 
   class LeatherTunic < EnchantableItem

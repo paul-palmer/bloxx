@@ -16,8 +16,8 @@ module Bloxx
 
     def hide_enchantments;  hide(0) end
     def show_enchantments;  show(0) end
-    def hide_attributes;    hide(1) end
-    def show_attributes;    show(1) end
+    def hide_modifiers;     hide(1) end
+    def show_modifiers;     show(1) end
     def hide_unbreakable;   hide(2) end
     def show_unbreakable;   show(2) end
     def hide_candestroy;    hide(3) end

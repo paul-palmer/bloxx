@@ -32,8 +32,6 @@ module Bloxx
     class NameableBlock__Display < Aspect
       def initialize; @display = Compound.new; super(display: @display) end
 
-      def color;    @display['color'] end
-      def color=(v) @display['color'] = v end
       def lore;     @display['Lore'] end
       def lore=(v)  @display['Lore'] = Text.new(v) end
       def name;     @display['Name'] end

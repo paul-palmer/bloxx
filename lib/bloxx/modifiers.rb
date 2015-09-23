@@ -5,54 +5,6 @@ require_relative 'base'
 
 module Bloxx
 
-  class Attribute < Compound
-    def initialize(name = nil, base = 1)
-      super()
-
-      self.name = name unless name.nil?
-      self.base = base unless base.nil?
-    end
-
-    def name;     self['Name'] end
-    def base;     self['Base'] end
-    def base=(v)  self['Base'] = v end
-
-    private
-
-    def name=(v)  self['Name'] = v end
-  end
-
-  class AttackDamage < Attribute
-    def initialize(base = 2.0) super('generic.attackDamage', base) end
-  end
-
-  class AttackSpeed < Attribute # 1.9
-    def initialize(base = 4.0) super('generic.attackSpeed', base) end
-  end
-
-  class FollowRange < Attribute
-    def initialize(base = 32.0) super('generic.followRange', base) end
-  end
-
-  class JumpStrength < Attribute # only applies to horses
-    def initialize(base = 0.7) super('horse.jumpStrength', base) end
-  end
-
-  class KnockbackResistance < Attribute
-    def initialize(base_percent = 0) super('generic.knockbackResistance', base_percent / 100) end
-  end
-
-  class MaxHealth < Attribute
-    def initialize(base = 20.0) super('generic.maxHealth', base) end
-  end
-
-  class MovementSpeed < Attribute
-    def initialize(base = 0.7) super('generic.movementSpeed', base) end
-  end
-
-  class SpawnReinforcements < Attribute # only applies to zombies
-    def initialize(base = 0.0) super('zombie.spawnReinforcements', base) end
-  end
 
   class AttributeModifier < Compound
     def initialize(attr, name, operation, amount)
@@ -94,31 +46,21 @@ module Bloxx
     def initialize(operation, amount) super('generic.attackDamage', 'generic.attackDamage', operation, amount) end
   end
 
+  class FollowRangeModifier < AttributeModifier
+    def initialize(operation, amount) super('generic.followRange', 'generic.followRange', operation, amount) end
+  end
+
   class KnockbackResistanceModifier < AttributeModifier
     def initialize(operation, amount) super('generic.knockbackResistance', 'generic.knockbackResistance', operation, amount) end
+  end
+
+  class MaxHealthModifier < AttributeModifier
+    def initialize(operation, amount) super('generic.maxHealth', 'generic.maxHealth', operation, amount) end
   end
 
   class MovementSpeedModifier < AttributeModifier
     def initialize(operation, amount) super('generic.movementSpeed', 'generic.movementSpeed', operation, amount) end
   end
-
-
-
-=begin
-/give @a bedrock 1 0 {
-	AttributeModifiers:[
-		{
-			AttributeName:generic.knockbackResistance,
-			Name:generic.knockbackResistance,
-			Amount:1,
-			Operation:0,
-			UUIDMost:10,
-			UUIDLeast:10
-		}
-	]
-}
-
-=end
 
 
 end
