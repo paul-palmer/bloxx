@@ -35,8 +35,8 @@ module Bloxx
     def pickup_delay=(v)  self['PickupDelay'] = v end
     def owner;            self['Owner'] end
     def owner=(v)         self['Owner'] = v end
-    def color;    @disp.lore end
-    def color=(v) @disp.lore = v end
+    def color;    @color end
+    def color=(v) @disp.color = (@color = v).to_nbt end
     def lore;     @disp.lore end
     def lore=(v)  @disp.lore = v end
     def name;     @disp.name end
@@ -137,7 +137,8 @@ module Bloxx
       self['BlockEntityTag'] = @block = block
     end
 
-    def to_nbt; super end
+    def to_nbt; super unless @block.empty? end
+    def empty?; @block.empty? end
 
     def method_missing(meth, *args, &block)
       if @block.respond_to?(meth)

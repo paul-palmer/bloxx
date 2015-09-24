@@ -36,9 +36,9 @@ module Bloxx
     def attr=(v)  self['AttributeName'] = v.to_s end
 
     OP = {
-        add: 0,
-        multiply: 1,
-        percent_adjust: 2,
+        add: 0,            # a value of 2.0 would set the attribute to 2.0
+        multiply: 1,       # a value of 2.0 would double the attribute
+        percent_adjust: 2, # a value of 2.0 would increase the attribute by 200% (triple it)
     }
   end
 
@@ -60,6 +60,18 @@ module Bloxx
 
   class MovementSpeedModifier < AttributeModifier
     def initialize(operation, amount) super('generic.movementSpeed', 'generic.movementSpeed', operation, amount) end
+  end
+
+
+
+  # coming in 1.9
+
+  class GenericArmorModifier < AttributeModifier
+    def initialize(operation, amount) super('generic.armor', 'generic.armor', operation, amount) end
+  end
+
+  class GenericAttackSpeedModifier < AttributeModifier
+    def initialize(operation, amount) super('generic.attackSpeed', 'generic.attackSpeed', operation, amount) end
   end
 
 

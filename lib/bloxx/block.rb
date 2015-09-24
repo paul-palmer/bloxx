@@ -22,7 +22,7 @@ module Bloxx
   module NameableBlock
     extend Forwardable
 
-    def_delegators :@__nameableblock, :color, :color=, :name, :name=, :lore, :lore=
+    def_delegators :@__nameableblock, :name, :name=, :lore, :lore=
 
     def initialize(*args, &block)
       super *args, &block

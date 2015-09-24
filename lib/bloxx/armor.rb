@@ -8,15 +8,15 @@ module Bloxx
   end
 
   class ChainChestplate < EnchantableItem
-    def initialize; super(303) end
+    def initialize; super('chainmail_chestplate') end
   end
 
   class ChainHelmet < EnchantableItem
-    def initialize; super(302) end
+    def initialize; super('chainmail_helmet') end
   end
 
   class ChainLeggings < EnchantableItem
-    def initialize; super(304) end
+    def initialize; super('chainmail_leggings') end
   end
 
 
@@ -28,19 +28,19 @@ module Bloxx
   end
 
   class DiamondChestplate < EnchantableItem
-    def initialize; super(311) end
+    def initialize; super('diamond_chestplate') end
   end
 
   class DiamondHelmet < EnchantableItem
-    def initialize; super(310) end
+    def initialize; super('diamond_helmet') end
   end
 
   class DiamondHorseArmor < EnchantableItem
-    def initialize; super(419) end
+    def initialize; super('diamond_horse_armor') end
   end
 
   class DiamondLeggings < EnchantableItem
-    def initialize; super(312) end
+    def initialize; super('diamond_leggings') end
   end
 
 
@@ -51,19 +51,19 @@ module Bloxx
   end
 
   class GoldenChestplate < EnchantableItem
-    def initialize; super(315) end
+    def initialize; super('golden_chestplate') end
   end
 
   class GoldenHelmet < EnchantableItem
-    def initialize; super(314) end
+    def initialize; super('golden_helmet') end
   end
 
   class GoldenHorseArmor < EnchantableItem
-    def initialize; super(418) end
+    def initialize; super('golden_horse_armor') end
   end
 
   class GoldenLeggings < EnchantableItem
-    def initialize; super(316) end
+    def initialize; super('golden_leggings') end
   end
 
 
@@ -74,19 +74,19 @@ module Bloxx
   end
 
   class IronChestplate < EnchantableItem
-    def initialize; super(307) end
+    def initialize; super('iron_chestplate') end
   end
 
   class IronHelmet < EnchantableItem
-    def initialize; super(306) end
+    def initialize; super('iron_helmet') end
   end
 
   class IronHorseArmor < EnchantableItem
-    def initialize; super(417) end
+    def initialize; super('iron_horse_armor') end
   end
 
   class IronLeggings < EnchantableItem
-    def initialize; super(308) end
+    def initialize; super('iron_leggings') end
   end
 
 
@@ -98,15 +98,15 @@ module Bloxx
   end
 
   class LeatherTunic < EnchantableItem
-    def initialize; super(299) end
+    def initialize; super('leather_chestplate') end
   end
 
   class LeatherCap < EnchantableItem
-    def initialize; super(298) end
+    def initialize; super('leather_helmet') end
   end
 
   class LeatherPants < EnchantableItem
-    def initialize; super(300) end
+    def initialize; super('leather_leggings') end
   end
 
 

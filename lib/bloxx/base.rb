@@ -72,7 +72,7 @@ module Bloxx
     def[]=(n, v)              @fields[n] = v end
     def delete(n)             @fields.delete(n) end
 
-    def empty?;               @s.all?(&:empty?) end
+    def empty?;               @fields.empty? && @s.all?(&:empty?) end
 
     def to_nbt
       empty? ? '' : "#{@s.reject(&:empty?).map(&:to_s).reject(&:empty?).join(',')}"

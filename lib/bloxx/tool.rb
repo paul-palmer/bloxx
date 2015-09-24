@@ -23,7 +23,8 @@ module Bloxx
 
   class ItemCommand
     def initialize(item, quantity = 1)
-      @item, @quantity = item, quantity
+      @item = (Block === item) ? BlockItem.new(item) : item
+      @quantity = quantity
     end
 
     def to_s

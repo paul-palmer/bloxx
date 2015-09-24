@@ -21,7 +21,6 @@ describe DiamondBoots do
     boots.enchantments << Protection.new(4)
     boots.enchantments << DepthStrider.new(3)
     boots.enchantments << FeatherFalling.new(4)
-    puts ItemCommand.new(boots)
 
     expect(ItemCommand.new(boots).to_s).to eq %q<i diamond_boots 1 {Unbreakable:1,HideFlags:7,display:{Name:"Safety Boots!"},AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Operation:2,Amount:0.5,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Operation:0,Amount:0.95,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.followRange",Name:"generic.followRange",Operation:2,Amount:-0.9,UUIDMost:0,UUIDLeast:0}],ench:[{id:0,lvl:4},{id:8,lvl:3},{id:2,lvl:4}]}>
   end
