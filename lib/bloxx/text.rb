@@ -35,7 +35,7 @@ module Bloxx
     def underline_end;        self << EndUnderline.new end
 
     def start_fg_color(c)     self << ColorFormat.new(c) end
-    def reset;                @flags = INIT_FLAGS.clone end
+    def reset;                self << Reset.new end
 
     def to_s;                 self.to_nbt end
     def to_nbt
@@ -72,7 +72,7 @@ module Bloxx
       (text || {}).merge((cum_state - initial_state).flags)
     end
 
-    def self.import(obj) self.to_format(obj) end
+    def self.cast(obj) (RawText === obj) ? obj : RawText.new.tap{|rt| rt << to_format(obj)} end
 
     attr_accessor :event
 
@@ -156,6 +156,10 @@ module Bloxx
       def format(state)     state.color = @color end
     end
 
+    class Reset < RawText_Base
+      def format(state) state.reset end
+    end
+
     class Text < RawText_Base
       attr_reader :text
       def initialize(text)  @text = SafeString.new(text) end
@@ -202,7 +206,7 @@ module Bloxx
   end
 
   class TextOnHover < HoverEvent
-    def initialize(raw_text) super(action: 'show_text', value: RawText::import(raw_text)) end
+    def initialize(raw_text) super(action: 'show_text', value: RawText::cast(raw_text)) end
   end
 
   class ShowItemOnHover < HoverEvent

@@ -32,7 +32,7 @@ module Bloxx
     def wool_subtype; WOOL2RGB.find_index(@color) end
     def text;         exact_color(FOREGROUND_COLORS) end
     def to_nbt;       @color.to_i end
-    def to_s;         self.to_nbt end
+    def to_s;         self.to_nbt.to_s end
 
     def closest_wool; Color.new(closest_color(WOOL_COLORS).last) end
     def closest_text; Color.new(closest_color(FOREGROUND_COLORS).last) end

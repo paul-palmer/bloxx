@@ -5,7 +5,7 @@ describe TextOnHover do
     hover = 'hover text'
     line = TextOnHover.new(hover)
 
-    expect(line.to_s).to eq %q<{hoverEvent:{action:show_text,value:"hover text"}}>
+    expect(line.to_s).to eq %q<{hoverEvent:{action:show_text,value:{text:"hover text"}}}>
   end
 
   it 'with a simple string' do

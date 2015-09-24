@@ -59,16 +59,6 @@ module Bloxx
     UNSAFE_CHARS = %<[]{},'" >
   end
 
-  class Text < MCBase
-    def initialize(text)
-      @text = text.split("\n").map {|t| SafeString.new(t)}
-    end
-
-    def to_s
-      "[#{@text.map(&:to_s).join(',')}]"
-    end
-  end
-
   class Compound < MCBase
     def initialize(*aspects)
       @s = [@fields = Aspect.new] + aspects.flatten

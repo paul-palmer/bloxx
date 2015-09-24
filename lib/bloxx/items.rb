@@ -16,11 +16,11 @@ module Bloxx
   end
 
   class Bow < EnchantableItem
-    def initialize; super(261) end
+    def initialize; super('bow') end
   end
 
   class Saddle < EnchantableItem
-    def initialize; super(329) end
+    def initialize; super('saddle') end
   end
 
 end

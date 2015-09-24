@@ -5,10 +5,14 @@ module Bloxx
   class Item < Compound
     def initialize(type, subtype = nil)
       @type, @subtype, @disp, @attrs, @modifiers = type, subtype, Display.new, Attributes.new, Modifiers.new
+      @hideflags = [0] * 6
       super(@disp, @attrs, @modifiers)
     end
 
     attr_reader :type, :subtype
+
+    extend Forwardable
+    def_delegators :@disp, :color, :color=, :lore, :lore=, :name, :name=
 
     def unbreakable?;   self['Unbreakable'] == 1 end
     def unbreakable;    self['Unbreakable'] = 1 end
@@ -35,12 +39,6 @@ module Bloxx
     def pickup_delay=(v)  self['PickupDelay'] = v end
     def owner;            self['Owner'] end
     def owner=(v)         self['Owner'] = v end
-    def color;    @color end
-    def color=(v) @disp.color = (@color = v).to_nbt end
-    def lore;     @disp.lore end
-    def lore=(v)  @disp.lore = v end
-    def name;     @disp.name end
-    def name=(v)  @disp.name = v end
 
     def subtype;    @subtype end
     def subtype=(v) @subtype = v end
@@ -50,8 +48,9 @@ module Bloxx
 
     private
 
-    def hide(n) self['HideFlags'] = (self['HideFlags'] || 0) | (1 << n) end
-    def show(n) self['HideFlags'] = (self['HideFlags'] || 0) & ~(1 << n) end
+    def hide(n) @hideflags[n] = 1; hideflags! end
+    def show(n) @hideflags[n] = 0; hideflags! end
+    def hideflags!; self['HideFlags'] = @hideflags.reverse.inject(0){|f, b| f << 1 | b} end
 
     class Attributes < Aspect
       def initialize; @attrs = List.new; super(Attributes: @attrs) end
@@ -69,7 +68,7 @@ module Bloxx
         def color;    self['color'] end
         def color=(v) self['color'] = v end
         def lore;     self['Lore'] end
-        def lore=(v)  self['Lore'] = Text.new(v) end
+        def lore=(v)  self['Lore'] = RawText::cast(v) end
         def name;     self['Name'] end
         def name=(v)  self['Name'] = SafeString.new(v) end
       end
