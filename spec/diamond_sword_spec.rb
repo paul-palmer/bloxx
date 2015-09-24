@@ -5,7 +5,7 @@ describe DiamondSword do
   it 'can be created' do
     sword = DiamondSword.new
 
-    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {}>
+    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1>
   end
 
   it 'with complex attributes' do

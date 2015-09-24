@@ -5,7 +5,7 @@ describe DiamondBoots do
   it 'can be created' do
     boots = DiamondBoots.new
 
-    expect(ItemCommand.new(boots).to_s).to eq %q<i diamond_boots 1 {}>
+    expect(ItemCommand.new(boots).to_s).to eq %q<i diamond_boots 1>
   end
 
   it 'with complex attributes' do

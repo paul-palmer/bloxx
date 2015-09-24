@@ -21,10 +21,18 @@ module Bloxx
     def[](n)                  @hsh[n] end
     def[]=(n, v)              @hsh[n] = v end
 
-    def empty?;               @hsh.empty? end
+    def empty?;               @hsh.all?{|_, v| value_empty?(v)} end
 
-    def to_nbt;               self.empty? ? '' : "#{@hsh.map { |key, value| "#{key}:#{value}" unless value.to_s.empty? }.compact.join(',')}"  end
+    def to_nbt;               self.empty? ? '' : "#{@hsh.map { |key, value| "#{key}:#{value}" unless value_empty?(value) }.compact.join(',')}"  end
     def to_s;                 self.to_nbt end
+
+    private
+
+    def value_empty?(v)
+      v.nil? ||
+          (v.empty? if v.respond_to?(:empty?)) ||
+          v.to_s.empty?
+    end
   end
 
   class List < MCBase
@@ -66,22 +74,19 @@ module Bloxx
       @s = [@fields = Aspect.new] + aspects.flatten
     end
 
-    def<<(aspect)             @s << aspect end
-
-    def[](n)                  @fields[n] end
-    def[]=(n, v)              @fields[n] = v end
-    def delete(n)             @fields.delete(n) end
-
     def empty?;               @fields.empty? && @s.all?(&:empty?) end
+    def to_s;                 "{#{self.to_nbt}}" end
 
     def to_nbt
       empty? ? '' : "#{@s.reject(&:empty?).map(&:to_s).reject(&:empty?).join(',')}"
     end
 
-    def to_s
-      "{#{self.to_nbt}}"
-    end
+    protected
 
+    def<<(aspect)             @s << aspect end
+    def[](n)                  @fields[n] end
+    def[]=(n, v)              @fields[n] = v end
+    def delete(n)             @fields.delete(n) end
   end
 
 end

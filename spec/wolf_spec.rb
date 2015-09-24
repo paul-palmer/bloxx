@@ -5,7 +5,7 @@ describe Wolf do
   it 'can be created' do
     wolf = Wolf.new
 
-    expect(SummonCommand.new(wolf).to_s).to eq %q<summon Wolf {}>
+    expect(SummonCommand.new(wolf).to_s).to eq %q<summon Wolf>
   end
 
   it 'with complex attributes' do

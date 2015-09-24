@@ -30,15 +30,19 @@ module Bloxx
     end
 
     class NameableBlock__Display < Aspect
-      def initialize; @display = Compound.new; super(display: @display) end
+      def initialize; @display = Internal.new; super(display: @display) end
 
-      def lore;     @display['Lore'] end
-      def lore=(v)  @display['Lore'] = Text.new(v) end
-      def name;     @display['Name'] end
-      def name=(v)  @display['Name'] = SafeString.new(v) end
+      extend Forwardable
+      def_delegators :@display, :lore, :lore=, :name, :name=, :empty?
 
-      def empty?;   @display.empty? end
+      class Internal < Compound
+        def lore;     self['Lore'] end
+        def lore=(v)  self['Lore'] = Text.new(v) end
+        def name;     self['Name'] end
+        def name=(v)  self['Name'] = SafeString.new(v) end
+      end
     end
+
   end
 
 

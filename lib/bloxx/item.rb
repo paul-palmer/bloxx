@@ -60,16 +60,19 @@ module Bloxx
     end
 
     class Display < Aspect
-      def initialize; @display = Compound.new; super(display: @display) end
+      def initialize; @display = Internal.new; super(display: @display) end
 
-      def color;    @display['color'] end
-      def color=(v) @display['color'] = v end
-      def lore;     @display['Lore'] end
-      def lore=(v)  @display['Lore'] = Text.new(v) end
-      def name;     @display['Name'] end
-      def name=(v)  @display['Name'] = SafeString.new(v) end
+      extend Forwardable
+      def_delegators :@display, :color, :color=, :lore, :lore=, :name, :name=, :empty?
 
-      def empty?;   @display.empty? end
+      class Internal < Compound
+        def color;    self['color'] end
+        def color=(v) self['color'] = v end
+        def lore;     self['Lore'] end
+        def lore=(v)  self['Lore'] = Text.new(v) end
+        def name;     self['Name'] end
+        def name=(v)  self['Name'] = SafeString.new(v) end
+      end
     end
 
     class Modifiers < Aspect
@@ -133,12 +136,24 @@ module Bloxx
   ###
   class BlockItem < Item
     def initialize(block)
+      raise 'BlockItem requires a block' unless Block === block
+
       super(block.type)
       self['BlockEntityTag'] = @block = block
     end
 
-    def to_nbt; super unless @block.empty? end
-    def empty?; @block.empty? end
+    ###
+    ### I would have preferred a design in which blocks could be automatically
+    ### promoted to items, but Minecraft doesn't maintain a clear inheritance
+    ### in these situations. The existing block data is split across two levels
+    ### during the conversion. Some, such as the display data (name, et al.)
+    ### move to the same level in the item. Others, such as chest items move down
+    ### a level into TileEntityData. This is an awkward design to manage.
+    ###
+
+    def empty?;       super && @block.empty? end
+    def field_names;  super - ['BlockEntityTag'] end
+
 
     def method_missing(meth, *args, &block)
       if @block.respond_to?(meth)

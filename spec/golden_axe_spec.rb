@@ -5,7 +5,7 @@ describe GoldenAxe do
   it 'can be created' do
     axe = GoldenAxe.new
 
-    expect(ItemCommand.new(axe).to_s).to eq %q<i golden_axe 1 {}>
+    expect(ItemCommand.new(axe).to_s).to eq %q<i golden_axe 1>
   end
 
   it 'with complex attributes' do

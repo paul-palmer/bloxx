@@ -5,7 +5,7 @@ describe LeatherBoots do
   it 'can be created' do
     boots = LeatherBoots.new
 
-    expect(ItemCommand.new(boots).to_s).to eq %q<i leather_boots 1 {}>
+    expect(ItemCommand.new(boots).to_s).to eq %q<i leather_boots 1>
   end
 
   it 'with complex attributes' do
@@ -25,7 +25,7 @@ describe LeatherBoots do
     boots.enchantments << Protection.new(5)
     boots.enchantments << DepthStrider.new(5)
     boots.enchantments << FeatherFalling.new(5)
-    puts ItemCommand.new(boots)
+    #puts ItemCommand.new(boots)
 
     expect(ItemCommand.new(boots).to_s).to eq %q<i leather_boots 1 {Unbreakable:1,HideFlags:39,display:{Name:"Ruby Slippers",color:16711680},AttributeModifiers:[{AttributeName:"generic.attackDamage",Name:"generic.attackDamage",Operation:2,Amount:1.0,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.followRange",Name:"generic.followRange",Operation:2,Amount:-0.9,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Operation:0,Amount:0.95,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.maxHealth",Name:"generic.maxHealth",Operation:2,Amount:1.0,UUIDMost:0,UUIDLeast:0},{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Operation:2,Amount:0.5,UUIDMost:0,UUIDLeast:0}],ench:[{id:0,lvl:5},{id:8,lvl:5},{id:2,lvl:5}]}>
   end

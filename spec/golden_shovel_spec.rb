@@ -5,7 +5,7 @@ describe GoldenShovel do
   it 'can be created' do
     shovel = GoldenShovel.new
 
-    expect(ItemCommand.new(shovel).to_s).to eq %q<i golden_shovel 1 {}>
+    expect(ItemCommand.new(shovel).to_s).to eq %q<i golden_shovel 1>
   end
 
   it 'with complex attributes' do

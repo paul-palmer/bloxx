@@ -5,7 +5,7 @@ describe IronGolem do
   it 'can be created' do
     golem = IronGolem.new
 
-    expect(SummonCommand.new(golem).to_s).to eq %q<summon VillagerGolem {}>
+    expect(SummonCommand.new(golem).to_s).to eq %q<summon VillagerGolem>
   end
 
   it 'with complex attributes' do

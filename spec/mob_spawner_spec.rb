@@ -5,7 +5,7 @@ describe MobSpawner do
   it 'can be created' do
     spawner = MobSpawner.new
 
-    expect(SummonCommand.new(spawner).to_s).to eq %q<summon mob_spawner {}>
+    expect(SummonCommand.new(spawner).to_s).to eq %q<summon mob_spawner>
   end
 
   it 'with complex attributes' do

@@ -5,7 +5,7 @@ describe DiamondPickaxe do
   it 'can be created' do
     pickaxe = DiamondPickaxe.new
 
-    expect(ItemCommand.new(pickaxe).to_s).to eq %q<i diamond_pickaxe 1 {}>
+    expect(ItemCommand.new(pickaxe).to_s).to eq %q<i diamond_pickaxe 1>
   end
 
   it 'with complex attributes' do
