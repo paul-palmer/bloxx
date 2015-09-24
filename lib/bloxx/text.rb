@@ -72,11 +72,7 @@ module Bloxx
       (text || {}).merge((cum_state - initial_state).flags)
     end
 
-    def self.cast(obj) (RawText === obj) ? obj : RawText.new.tap{|rt| rt << to_format(obj)} end
-
     attr_accessor :event
-
-    private
 
     def self.to_format(a)
       case
@@ -86,6 +82,8 @@ module Bloxx
           raise 'Broked'
       end
     end
+
+    private
 
     def obj2nbt(obj)
       case
@@ -206,7 +204,7 @@ module Bloxx
   end
 
   class TextOnHover < HoverEvent
-    def initialize(raw_text) super(action: 'show_text', value: RawText::cast(raw_text)) end
+    def initialize(raw_text) super(action: 'show_text', value: Bloxx::cast2raw(raw_text)) end
   end
 
   class ShowItemOnHover < HoverEvent

@@ -158,11 +158,10 @@ module Bloxx
 
 
   class CommandBlock < Block
-    include NameableBlock
+    prepend NameableBlock
 
     def initialize(command = nil)
       super('command_block')
-      self << (@disp = Display.new)
       self.command = command unless command.nil?
     end
 
@@ -193,5 +192,36 @@ module Bloxx
       self['MaxSpawnDelay'] = max unless max.nil?
     end
   end
+
+  class Sign < Block
+    prepend NameableBlock
+
+    attr_reader :line
+
+    def initialize
+      super('sign')
+      self << (@line = Line.new)
+    end
+
+    private
+
+    class Line < Aspect
+      def initialize; @line = [] end
+
+      def<<(line) @line << line end
+      def[](n)    @line[n] end
+      def[]=(n,v) @line[n] = v end
+      def empty?; @line.empty? end
+
+      def to_nbt
+        @line.zip(1..@line.length).map do |e|
+          l, n = *e
+          "Text#{n}:#{SafeString.new(cast2raw(l)).quoted}" unless l.nil?
+        end.compact.join(',')
+      end
+    end
+  end
+
+
 
 end

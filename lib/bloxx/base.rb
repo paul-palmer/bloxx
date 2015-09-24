@@ -1,6 +1,14 @@
 
 module Bloxx
 
+  def cast2raw(obj)
+    if ([RawText, ClickEvent, HoverEvent].any?{|c| c === obj})
+      obj
+    else
+      RawText.new.tap{|rt| rt << RawText.to_format(obj)}
+    end
+  end
+
   class MCBase
     def bits(v, bit_rng)
       (v & mask(bit_rng)) >> bit_rng.first
@@ -13,6 +21,7 @@ module Bloxx
     def mask(bit_rng)
       ((1 << bit_rng.size) - 1) << bit_rng.first
     end
+
   end
 
   class Aspect < MCBase

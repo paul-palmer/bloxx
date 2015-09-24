@@ -68,7 +68,7 @@ module Bloxx
         def color;    self['color'] end
         def color=(v) self['color'] = v end
         def lore;     self['Lore'] end
-        def lore=(v)  self['Lore'] = RawText::cast(v) end
+        def lore=(v)  self['Lore'] = cast2raw(v) end
         def name;     self['Name'] end
         def name=(v)  self['Name'] = SafeString.new(v) end
       end

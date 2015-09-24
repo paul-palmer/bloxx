@@ -37,7 +37,7 @@ module Bloxx
 
       class Internal < Compound
         def lore;     self['Lore'] end
-        def lore=(v)  self['Lore'] = RawText::cast(v) end
+        def lore=(v)  self['Lore'] = cast2raw(v) end
         def name;     self['Name'] end
         def name=(v)  self['Name'] = SafeString.new(v) end
       end
