@@ -5,8 +5,8 @@ module Bloxx
 
 
   class Ocelot < Entity
-    include Entity_Breedable
-    include Entity_Tameable
+    include Breedable
+    include Tameable
 
     def initialize(cat_type = 0)
       super('Ozelot')

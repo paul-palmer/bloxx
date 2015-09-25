@@ -10,6 +10,12 @@ require_relative 'rabbits'
 module Bloxx
 
 
+  class Bat < Entity
+    def initialize
+      super('Bat')
+    end
+  end
+
   class FallingSand < Entity
     def initialize(block = nil, riding = nil)
       super('FallingSand')
@@ -24,24 +30,6 @@ module Bloxx
     def drop_item!;     self['DropItem'] end
     def dont_drop_item!;delete('DropItem') end
     def drop_item?;     self['DropItem'] == 1 end
-  end
-
-  class Fireball < Entity
-    def initialize
-      super('Fireball')
-      self.power = 1 # 0-127
-    end
-
-    def power=(v) self['ExplosionPower'] = v.to_i end
-  end
-
-  class FireworksRocket < Entity
-    def initialize
-      super('FireworksRocketEntity')
-    end
-
-    def lifetime=(v)  self['LifeTime'] = v end
-    def fireworks=(v) self['FireworksItem'] = Items.new(v) end
   end
 
   class IronGolem < Entity
@@ -59,18 +47,9 @@ module Bloxx
     def fuse=(v) self['Fuse'] = v.to_i end
   end
 
-  class Slime < Entity
-    def initialize
-      super('Slime')
-      self.power = 1 # 0-127
-    end
-
-    def size=(v) self['Size'] = v.to_i end
-  end
-
   class Wolf < Entity
-    include Entity_Breedable
-    include Entity_Tameable
+    include Breedable
+    include Tameable
 
     def initialize
       super('Wolf')
@@ -84,7 +63,7 @@ module Bloxx
     def collar_color=(v)  self['CollarColor'] = v end
   end
 
-  class XPOrb < Entity
+  class XPOrb < DroppedEntity
     def initialize(value = 1)
       super('XPOrb')
       self.value = value

@@ -16,52 +16,54 @@ module Bloxx
 
     def type;           @type end
     def subtype;        @subtype end
-  end
 
+    protected
 
-  module NameableBlock
-    extend Forwardable
+    module Nameable
+      extend Forwardable
 
-    def_delegators :@__nameableblock, :name, :name=, :lore, :lore=
+      def_delegators :@__nameableblock, :name, :name=, :lore, :lore=
 
-    def initialize(*args, &block)
-      super *args, &block
-      self << (@__nameableblock = NameableBlock__Display.new)
+      def initialize(*args, &block)
+        super *args, &block
+        self << (@__nameableblock = NameableBlock__Display.new)
+      end
+
+      class NameableBlock__Display < Aspect
+        def initialize; @display = Internal.new; super(display: @display) end
+
+        extend Forwardable
+        def_delegators :@display, :lore, :lore=, :name, :name=, :empty?
+
+        class Internal < Compound
+          def lore;     self['Lore'] end
+          def lore=(v)  self['Lore'] = cast2raw(v) end
+          def name;     self['Name'] end
+          def name=(v)  self['Name'] = SafeString.new(v) end
+        end
+      end
+
     end
 
-    class NameableBlock__Display < Aspect
-      def initialize; @display = Internal.new; super(display: @display) end
-
+    module Lockable
       extend Forwardable
-      def_delegators :@display, :lore, :lore=, :name, :name=, :empty?
 
-      class Internal < Compound
-        def lore;     self['Lore'] end
-        def lore=(v)  self['Lore'] = cast2raw(v) end
-        def name;     self['Name'] end
-        def name=(v)  self['Name'] = SafeString.new(v) end
+      def_delegators :@__lockableblock, :lock, :lock=
+
+      def initialize(*args, &block)
+        super *args, &block
+        self << (@__lockableblock = LockableBlock__Key.new)
+      end
+
+      class LockableBlock__Key < Aspect
+        def lock(key) self['Lock'] = (key.name rescue key.to_s) end
+        def unlock;   self.delete('Lock') end
+        def locked?;  !self['Lock'].nil? end
       end
     end
 
   end
 
-
-  module LockableBlock
-    extend Forwardable
-
-    def_delegators :@__lockableblock, :lock, :lock=
-
-    def initialize(*args, &block)
-      super *args, &block
-      self << (@__lockableblock = LockableBlock__Key.new)
-    end
-
-    class LockableBlock__Key < Aspect
-      def lock(key) self['Lock'] = (key.name rescue key.to_s) end
-      def unlock;   self.delete('Lock') end
-      def locked?;  !self['Lock'].nil? end
-    end
-  end
 
 
 

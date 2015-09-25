@@ -71,23 +71,51 @@ module Bloxx
 
     class Equipment < Compound
     end
+
+
+    module Breedable
+      def age;              self['Age'] end
+      def age=(v)           self['Age'] = v end
+      def forced_age;       self['ForcedAge'] end
+      def forced_age=(v)    self['ForcedAge'] = v end
+      def in_love;          self['InLove'] end
+      def in_love=(v)       self['InLove'] = v end
+    end
+
+    module Tameable
+      def owner;            self['Owner'] end
+      def owner=(v)         self['Owner'] = v end # pre 1.8 only
+      def owner_uuid;       self['OwnerUUID'] end
+      def owner_uuid=(v)    self['OwnerUUID'] = v end
+      def sit!;             self['Sitting'] = 1 end
+      def stand!;           delete('Sitting') end
+      def sitting?;         self['Sitting'] == 1 end
+    end
+
   end
 
-  module Entity_Breedable
-    def age;              self['Age'] end
-    def age(v)            self['Age'] = v end
-    def forced_age;       self['ForcedAge'] end
-    def forced_age(v)     self['ForcedAge'] = v end
-    def in_love;          self['InLove'] end
-    def in_love=(v)       self['InLove'] = v end
+
+  class DroppedEntity < Entity
+    def age;              self['Age'] end             # ticks since entity dropped
+    def age=(v)           self['Age'] = v end
+    def health;           self['Health'] end          # defaults to 5. Entity destroyed when health reaches 0
+    def health=(v)        self['Health'] = v end
   end
 
-  module Entity_Tameable
-    def owner_uuid;       self['OwnerUUID'] end
-    def owner_uuid=(v)    self['OwnerUUID'] = v end
-    def sit;              self['Sitting'] = 1 end
-    def stand;            delete('Sitting') end
-    def sitting?(v)       self['Sitting'] == 1 end
+
+  class DroppedItem < DroppedEntity
+    def initialize(item)
+      super(item.type)
+      self['Item'] = item
+    end
+
+    def pickup_delay;     self['PickupDelay'] end     # ticks until item can be picked up
+    def pickup_delay=(v)  self['PickupDelay'] = v end
+    def owner;            self['Owner'] end           # only named player can pickup item
+    def owner=(v)         self['Owner'] = v end
+    def thrower;          self['Thrower'] end         # name of player that dropped the item
+    def thrower=(v)       self['Thrower'] = v end
   end
+
 
 end

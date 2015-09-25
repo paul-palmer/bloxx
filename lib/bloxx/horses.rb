@@ -4,8 +4,8 @@ require_relative 'entity'
 module Bloxx
 
   class EntityHorse < Entity
-    include Entity_Breedable
-    include Entity_Tameable
+    include Breedable
+    include Tameable
 
     def initialize(type = 0)
       super('EntityHorse')

@@ -125,8 +125,8 @@ module Bloxx
 
 
   class Chest < Block
-    prepend NameableBlock
-    prepend LockableBlock
+    prepend Nameable
+    prepend Lockable
 
     def initialize
       super('chest')
@@ -158,7 +158,7 @@ module Bloxx
 
 
   class CommandBlock < Block
-    prepend NameableBlock
+    prepend Nameable
 
     def initialize(command = nil)
       super('command_block')
@@ -194,7 +194,7 @@ module Bloxx
   end
 
   class Sign < Block
-    prepend NameableBlock
+    prepend Nameable
 
     attr_reader :line
 

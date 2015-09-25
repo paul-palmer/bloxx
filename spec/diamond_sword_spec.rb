@@ -25,8 +25,6 @@ describe DiamondSword do
       mci.name = 'Sticker!'
       mci.lore = 'Pointy end towards your enemy'
       mci.unbreakable
-      mci.owner = 'BornToCode'
-      mci.age = -32768
       mci.hide_enchantments
       mci.hide_unbreakable
       mci.enchantments << Knockback.new(2)
@@ -34,7 +32,7 @@ describe DiamondSword do
       mci.enchantments << Sharpness.new(8)
     end
 
-    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {Unbreakable:1,Owner:BornToCode,Age:-32768,HideFlags:5,display:{Name:Sticker!,Lore:{text:"Pointy end towards your enemy"}},ench:[{id:19,lvl:2},{id:21,lvl:50},{id:16,lvl:8}]}>
+    expect(ItemCommand.new(sword).to_s).to eq %q<i diamond_sword 1 {Unbreakable:1,HideFlags:5,display:{Name:Sticker!,Lore:{text:"Pointy end towards your enemy"}},ench:[{id:19,lvl:2},{id:21,lvl:50},{id:16,lvl:8}]}>
   end
 
 end

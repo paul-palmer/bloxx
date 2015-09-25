@@ -31,15 +31,6 @@ module Bloxx
     def hide_others;        hide(5) end
     def show_others;        show(5) end
 
-    def age;              self['Age'] end
-    def age=(v)           self['Age'] = v end
-    def health;           self['Health'] end
-    def health=(v)        self['Health'] = v end
-    def pickup_delay;     self['PickupDelay'] end
-    def pickup_delay=(v)  self['PickupDelay'] = v end
-    def owner;            self['Owner'] end
-    def owner=(v)         self['Owner'] = v end
-
     def subtype;    @subtype end
     def subtype=(v) @subtype = v end
 
